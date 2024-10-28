@@ -194,7 +194,7 @@ https://grafana.com/docs/alloy/latest/configure/linux/
 
 To configure Alloy on Linux, perform the following steps:
 
-Edit the default configuration file at /etc/alloy/config.alloy.
+Edit the default configuration file at `/etc/alloy/config.alloy`.
 
 Run the following command in a terminal to reload the configuration file:
 
@@ -206,8 +206,8 @@ To change the configuration file used by the service, perform the following step
 
 Edit the environment file for the service:
 
-Debian or Ubuntu: edit /etc/default/alloy
-RHEL/Fedora or SUSE/openSUSE: edit /etc/sysconfig/alloy
+Debian or Ubuntu: edit `/etc/default/alloy`
+RHEL/Fedora or SUSE/openSUSE: edit `/etc/sysconfig/alloy`
 Change the contents of the CONFIG_FILE environment variable to point at the new configuration file to use.
 
 Restart the Alloy service:
