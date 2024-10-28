@@ -114,3 +114,74 @@ Add new modules for more Grafana resources.
 For more information or to get started, be sure to check out the Grafana Ansible collection GitHub repository or contact our team.
 
 If you’re not already using Grafana Cloud — the easiest way to get started with observability — sign up now for a free 14-day trial of Grafana Cloud Pro, with unlimited metrics, logs, traces, and users, long-term retention, and access to one Enterprise plugin.
+
+# Install or uninstall Grafana Alloy using Ansible
+
+You can use the Grafana Ansible Collection to install and manage Alloy on Linux hosts.
+
+### Before you begin
+
+These steps assume you already have a working Ansible setup and a pre-existing inventory.
+You can add the tasks below to any new or existing role.
+
+Steps
+
+To add Alloy to a host:
+
+Create a file named `alloy.yml` and add the following:
+
+```yaml
+- name: Install Alloy
+  hosts: all
+  become: true
+
+  tasks: - name: Install Alloy
+  ansible.builtin.include_role:
+  name: grafana.grafana.alloy
+  vars:
+  config: |
+  prometheus.scrape "default" {
+  targets = [{"__address__" = "localhost:12345"}]
+  forward_to = [prometheus.remote_write.prom.receiver]
+  }
+  prometheus.remote_write "prom" {
+  endpoint {
+  url = "<YOUR_PROMETHEUS_PUSH_ENDPOINT>"
+  }
+  }
+  This snippet has a sample configuration to collect and send Alloy metrics to Prometheus
+```
+
+Replace the following:
+
+`<YOUR_PROMETHEUS_PUSH_ENDPOINT>`: The Remote write endpoint of your Prometheus Instance.
+
+Run the Ansible playbook. Open a terminal window and run the following command from the Ansible playbook directory.
+
+```java
+ansible-playbook alloy.yml
+```
+
+Validate
+
+To verify that the Alloy service on the target machine is active and running, open a terminal window and run the following command:
+
+```bash
+sudo systemctl status alloy.service
+```
+
+If the service is active and running, the output should look similar to this:
+
+```java
+alloy.service - Grafana Alloy
+  Loaded: loaded (/etc/systemd/system/alloy.service; enabled; vendor preset: enabled)
+  Active: active (running) since Wed 2022-07-20 09:56:15 UTC; 36s ago
+Main PID: 3176 (alloy-linux-amd)
+  Tasks: 8 (limit: 515)
+  Memory: 92.5M
+    CPU: 380ms
+  CGroup: /system.slice/alloy.service
+    └─3176 /usr/local/bin/alloy-linux-amd64 --config.file=/etc/grafana-cloud/alloy-config.yaml
+```
+
+Next steps
