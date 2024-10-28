@@ -24,7 +24,8 @@ git push -u origin main
 
 ```
 
-@ How to get started with the new Grafana Ansible collection for Grafana Cloud
+# How to get started with the new Grafana Ansible collection for Grafana Cloud
+
 Ishan Jain
 Ishan Jain
 
