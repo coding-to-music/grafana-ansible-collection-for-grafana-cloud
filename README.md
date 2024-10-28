@@ -117,6 +117,8 @@ If you’re not already using Grafana Cloud — the easiest way to get started w
 
 # Install or uninstall Grafana Alloy using Ansible
 
+https://grafana.com/docs/alloy/latest/set-up/install/ansible/
+
 You can use the Grafana Ansible Collection to install and manage Alloy on Linux hosts.
 
 ### Before you begin
