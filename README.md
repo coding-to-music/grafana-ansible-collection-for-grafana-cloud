@@ -188,3 +188,78 @@ Main PID: 3176 (alloy-linux-amd)
 ```
 
 Next steps
+https://grafana.com/docs/alloy/latest/configure/linux/
+
+# Configure Grafana Alloy on Linux
+
+To configure Alloy on Linux, perform the following steps:
+
+Edit the default configuration file at /etc/alloy/config.alloy.
+
+Run the following command in a terminal to reload the configuration file:
+
+```bash
+sudo systemctl reload alloy
+```
+
+To change the configuration file used by the service, perform the following steps:
+
+Edit the environment file for the service:
+
+Debian or Ubuntu: edit /etc/default/alloy
+RHEL/Fedora or SUSE/openSUSE: edit /etc/sysconfig/alloy
+Change the contents of the CONFIG_FILE environment variable to point at the new configuration file to use.
+
+Restart the Alloy service:
+
+```bash
+sudo systemctl restart alloy
+```
+
+## Pass additional command-line flags
+
+By default, the Alloy service launches with the run command, passing the following flags:
+
+```bash
+--storage.path=/var/lib/alloy
+```
+
+To pass additional command-line flags to the Alloy binary, perform the following steps:
+
+Edit the environment file for the service:
+
+Debian-based systems: edit /etc/default/alloy
+
+RedHat or SUSE-based systems: edit /etc/sysconfig/alloy
+
+Change the contents of the CUSTOM_ARGS environment variable to specify command-line flags to pass.
+
+```bash
+Restart the Alloy service:
+```
+
+```bash
+sudo systemctl restart alloy
+```
+
+To see the list of valid command-line flags that can be passed to the service, refer to the documentation for the run command.
+
+## Expose the UI to other machines
+
+By default, Alloy listens on the local network for its HTTP server. This prevents other machines on the network from being able to access the UI for debugging.
+
+To expose the UI to other machines, complete the following steps:
+
+Follow Pass additional command-line flags to edit command line flags passed to Alloy
+
+Add the following command line argument to CUSTOM_ARGS:
+
+```bash
+--server.http.listen-addr=<LISTEN_ADDR>:12345
+```
+
+Replace the following:
+
+`<LISTEN_ADDR>`: An IP address which other machines on the network have access to. For example, the IP address of the machine Alloy is running on.
+
+To listen on all interfaces, replace `<LISTEN_ADDR>` with `0.0.0.0.`
