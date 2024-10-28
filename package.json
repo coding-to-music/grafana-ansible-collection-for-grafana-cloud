@@ -1,0 +1,13 @@
+{
+  "name": "grafana-ansible-collection-for-grafana-cloud",
+  "version": "1.0.0",
+  "description": "How to get started with the new Grafana Ansible collection for Grafana Cloud Ishan Jain Ishan Jain",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "git add . && git commit -m Build && git push",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
