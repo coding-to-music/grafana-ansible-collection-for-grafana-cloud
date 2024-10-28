@@ -145,12 +145,13 @@ Create a file named `alloy.yml` and add the following:
   forward_to = [prometheus.remote_write.prom.receiver]
   }
   prometheus.remote_write "prom" {
-  endpoint {
-  url = "<YOUR_PROMETHEUS_PUSH_ENDPOINT>"
-  }
-  }
-  This snippet has a sample configuration to collect and send Alloy metrics to Prometheus
+    endpoint {
+    url = "<YOUR_PROMETHEUS_PUSH_ENDPOINT>"
+      }
+    }
 ```
+
+This snippet has a sample configuration to collect and send Alloy metrics to Prometheus
 
 Replace the following:
 
