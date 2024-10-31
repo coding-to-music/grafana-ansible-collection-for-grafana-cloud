@@ -381,8 +381,8 @@ Edit your playbook to reference these environment variables.
                 remote_write:
                   - url: https://prometheus-us-central1.grafana.net/api/prom/push
                     basic_auth:
-                      username: "{{ grafana_username }}"
-                      password: "{{ grafana_api_key }}"
+                      username: "{{ GRAFANA_USERNAME }}"
+                      password: "{{ GRAFANA_API_KEY }}"
 
     - name: Ensure Grafana Alloy Agent is enabled and started
       systemd:
