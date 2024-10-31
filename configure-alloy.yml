@@ -3,6 +3,30 @@
   hosts: all
   become: yes
   tasks:
+    - name: Add Grafana APT key
+      apt_key:
+        url: https://packages.grafana.com/gpg.key
+        state: present
+
+    - name: Add Grafana repository
+      apt_repository:
+        repo: 'deb https://packages.grafana.com/oss/deb stable main'
+        state: present
+
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    - name: Install Grafana Alloy Agent
+      apt:
+        name: grafana-agent
+        state: present
+
+    - name: Create Grafana Alloy configuration directory
+      file:
+        path: /etc/grafana-agent
+        state: directory
+
     - name: Create Grafana Alloy configuration file
       copy:
         dest: /etc/grafana-agent/config.yml
@@ -17,5 +41,11 @@
                 remote_write:
                   - url: https://prometheus-us-central1.grafana.net/api/prom/push
                     basic_auth:
-                      username: "{{ lookup('env', 'GRAFANA_USERNAME') }}"
-                      password: "{{ lookup('env', 'GRAFANA_API_KEY') }}"
+                      username: "{{ grafana_username }}"
+                      password: "{{ grafana_api_key }}"
+
+    - name: Ensure Grafana Alloy Agent is enabled and started
+      systemd:
+        name: grafana-agent
+        enabled: yes
+        state: started
