@@ -414,3 +414,38 @@ login to the remote machine
 ```java
 sudo systemctl status grafana-agent
 ```
+
+## Install and run Grafana Alloy
+### Run this command to install and run Grafana Alloy as a alloy.service systemd service
+
+URL <username> connections/add-new-connection/alloy-health?page=alloy
+
+```bash
+--- Using package system deb. Downloading and installing package for amd64
+################################################################################################## 100.0%
+--- Verifying package checksum
+Selecting previously unselected package alloy.
+(Reading database ... 114984 files and directories currently installed.)
+Preparing to unpack /tmp/alloy-1.4.3-1.amd64.deb ...
+Unpacking alloy (1.4.3-1) ...
+Setting up alloy (1.4.3-1) ...
+--- Retrieving config and placing in /etc/alloy/config.alloy
+--- Enabling and starting alloy.service
+Created symlink /etc/systemd/system/multi-user.target.wants/alloy.service → /lib/systemd/system/alloy.service.
+
+
+Alloy is now running!
+
+To check the status of Alloy, run:
+   sudo systemctl status alloy.service
+
+To restart Alloy, run:
+   sudo systemctl restart alloy.service
+
+The config file is located at:
+   /etc/alloy/config.alloy
+```   
+
+View the dashboard:
+
+https://<username>.grafana.net/a/grafana-collector-app/alloy/monitoring
