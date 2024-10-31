@@ -371,6 +371,8 @@ Run the Playbook:
 
 ```bash
 ansible-playbook your_playbook.yml
+
+ansible-playbook -i inventory configure-alloy.yml 
 ```
 
 Both methods will help you manage your secrets securely and integrate them into your Ansible playbooks. 

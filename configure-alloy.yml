@@ -1,0 +1,21 @@
+---
+- name: Install and configure Grafana Alloy Agent
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create Grafana Alloy configuration file
+      copy:
+        dest: /etc/grafana-agent/config.yml
+        content: |
+          # Grafana Agent Configuration
+          metrics:
+            wal_directory: /var/lib/grafana-agent
+            global:
+              scrape_interval: 60s
+            configs:
+              - name: integrations
+                remote_write:
+                  - url: https://prometheus-us-central1.grafana.net/api/prom/push
+                    basic_auth:
+                      username: "{{ lookup('env', 'GRAFANA_USERNAME') }}"
+                      password: "{{ lookup('env', 'GRAFANA_API_KEY') }}"

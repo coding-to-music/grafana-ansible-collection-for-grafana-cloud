@@ -1,4 +1,5 @@
 .env
+.env-notes
 inventory
 inventory.ini
 my-alloy.yml
