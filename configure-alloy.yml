@@ -41,8 +41,8 @@
                 remote_write:
                   - url: https://prometheus-us-central1.grafana.net/api/prom/push
                     basic_auth:
-                      username: "{{ GRAFANA_USERNAME }}"
-                      password: "{{ GRAFANA_API_KEY }}"
+                      username: "{{ lookup('env', 'GRAFANA_USERNAME') }}"
+                      password: "{{ lookup('env', 'GRAFANA_API_KEY') }}"
 
     - name: Ensure Grafana Alloy Agent is enabled and started
       systemd:
