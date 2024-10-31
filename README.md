@@ -406,3 +406,11 @@ ansible-playbook -i inventory configure-alloy.yml
 ```
 
 Both methods will help you manage your secrets securely and integrate them into your Ansible playbooks. 
+
+## verify alloy is running on the desired machine
+
+login to the remote machine
+
+```java
+sudo systemctl status grafana-agent
+```
